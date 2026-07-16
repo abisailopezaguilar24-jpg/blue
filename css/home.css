@@ -1,0 +1,167 @@
+/* ============================================================
+   home.css — solo para home.html
+============================================================ */
+
+.home-fondo {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--amarillo) 0px,
+    var(--amarillo) 60px,
+    var(--negro) 60px,
+    var(--negro) 100px
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 20px 40px;
+}
+
+/* ---------- Barra superior ---------- */
+.home-barra-superior {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 20;
+}
+
+.home-icono-circulo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--amarillo-suave);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: var(--sombra-suave);
+  transition: transform 0.15s ease;
+}
+.home-icono-circulo:active {
+  transform: scale(0.92);
+}
+.home-icono-circulo svg {
+  width: 28px;
+  height: 28px;
+}
+
+.home-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--rojo-corazon);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 800;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--amarillo);
+}
+
+/* ---------- Corazones flotantes ---------- */
+.home-corazones {
+  position: absolute;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 240px;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.corazon-flotante {
+  position: absolute;
+  font-size: 1.6rem;
+  color: var(--rojo-corazon);
+  bottom: 40px;
+  opacity: 0;
+  animation-name: flotar-corazon;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes flotar-corazon {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.6);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1);
+  }
+  80% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-140px) scale(0.8);
+  }
+}
+
+/* ---------- Botón central "+" ---------- */
+.home-boton-mas {
+  width: min(58vw, 240px);
+  height: min(58vw, 240px);
+  border-radius: 50%;
+  background: var(--amarillo-suave);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  box-shadow: var(--sombra-suave);
+  transition: transform 0.18s ease;
+  z-index: 10;
+  position: relative;
+}
+.home-boton-mas:active {
+  transform: scale(0.94);
+}
+.home-boton-mas svg {
+  width: 30%;
+  height: 30%;
+}
+
+/* ---------- Tarjeta de bienvenida ---------- */
+.home-tarjeta {
+  background: var(--blanco);
+  width: 100%;
+  max-width: 480px;
+  border-radius: 22px;
+  padding: 22px 26px;
+  margin-top: 34px;
+  text-align: center;
+  box-shadow: var(--sombra-suave);
+  z-index: 10;
+}
+.home-tarjeta h1 {
+  font-size: 1.4rem;
+  font-family: "Kalam", cursive;
+  margin-bottom: 8px;
+}
+.home-tarjeta p {
+  font-family: "Kalam", cursive;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.home-firma {
+  font-family: var(--font-script);
+  font-size: 1.6rem;
+  margin-top: auto;
+  padding-top: 26px;
+  color: var(--negro);
+}
+
+@media (max-width: 400px) {
+  .home-tarjeta {
+    padding: 18px 20px;
+  }
+}

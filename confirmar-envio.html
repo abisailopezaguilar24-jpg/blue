@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover" />
+<title>Enviar carta — For you, My Blue</title>
+<link rel="stylesheet" href="css/estilos-base.css" />
+<link rel="stylesheet" href="css/confirmar-envio.css" />
+</head>
+<body>
+
+  <main class="ce-tarjeta aparecer">
+    <h1>Enviar?</h1>
+
+    <button class="modal-boton si ce-boton" id="btn-si">SI</button>
+    <button class="modal-boton no ce-boton" id="btn-no">NO</button>
+  </main>
+
+  <!-- Modal: ¿segura que no quieres enviarla? -->
+  <div class="modal-fondo" id="modal-confirmar-no">
+    <div class="modal-caja">
+      <h2>¿Segura que no<br>quieres enviarla?</h2>
+      <div class="modal-botones">
+        <button class="modal-boton si" id="btn-no-si">Si, descartar</button>
+        <button class="modal-boton no" id="btn-no-no">No, seguir aquí</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: enviado con éxito -->
+  <div class="modal-fondo" id="modal-exito">
+    <div class="modal-caja">
+      <h2>Se ah enviado con<br>exito</h2>
+    </div>
+  </div>
+
+  <!-- Pantalla de carga mientras se guarda en Firebase -->
+  <div class="cargando-overlay" id="ce-cargando" style="display:none;">
+    <span class="cargando-punto"></span>
+    <span class="cargando-punto"></span>
+    <span class="cargando-punto"></span>
+  </div>
+
+  <script type="module" src="js/confirmar-envio.js"></script>
+</body>
+</html>

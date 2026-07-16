@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover" />
+<title>Inicia Sesión — For you, My Blue</title>
+<link rel="stylesheet" href="css/estilos-base.css" />
+<link rel="stylesheet" href="css/login.css" />
+</head>
+<body>
+
+  <main class="login-contenedor">
+    <div class="login-tarjeta aparecer">
+      <h1 class="login-titulo">Inicia Sesión</h1>
+
+      <form id="form-login" autocomplete="off">
+        <input
+          type="text"
+          id="input-usuario"
+          class="login-input"
+          placeholder="Usuario..."
+          required
+        />
+        <input
+          type="password"
+          id="input-password"
+          class="login-input"
+          placeholder="Contraseña..."
+          required
+        />
+
+        <p id="login-error" class="login-error"></p>
+
+        <button type="submit" class="boton-flecha login-boton" aria-label="Entrar">
+          <svg viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 15h52M40 3l14 12-14 12" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <div class="cargando-overlay" id="pantalla-carga" style="display:none;">
+    <span class="cargando-punto"></span>
+    <span class="cargando-punto"></span>
+    <span class="cargando-punto"></span>
+  </div>
+
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+/* ============================================================
+   escribir-carta.css — solo para escribir-carta.html
+============================================================ */
+
+body {
+  min-height: 100vh;
+  padding: 90px 20px 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.escribir-titulo {
+  background: var(--blanco);
+  padding: 14px 30px;
+  border-radius: 50px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  font-style: italic;
+  box-shadow: var(--sombra-suave);
+  margin-bottom: 26px;
+  align-self: flex-start;
+}
+
+.escribir-textarea {
+  width: 100%;
+  max-width: 620px;
+  flex: 1;
+  min-height: 40vh;
+  background: var(--blanco);
+  border: none;
+  border-radius: 22px;
+  padding: 28px 26px;
+  font-family: var(--font-hand);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--negro);
+  box-shadow: var(--sombra-suave);
+  resize: none;
+  /* Extensión ilimitada: si el texto no cabe, aparece scroll interno */
+  overflow-y: auto;
+}
+.escribir-textarea::placeholder {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--gris-placeholder);
+}
+.escribir-textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--azul-boton), var(--sombra-suave);
+}
+
+.escribir-boton-continuar {
+  position: fixed;
+  right: 24px;
+  bottom: 28px;
+}
+
+@media (max-width: 400px) {
+  .escribir-titulo {
+    font-size: 1.15rem;
+    padding: 12px 22px;
+  }
+}

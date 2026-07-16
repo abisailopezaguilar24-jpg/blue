@@ -1,0 +1,89 @@
+/* ============================================================
+   ver-carta.css — solo para ver-carta.html
+============================================================ */
+
+.ver-carta-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+  padding: 80px 20px 40px;
+}
+
+.ver-carta-hoja-wrap {
+  width: 100%;
+  opacity: 0;
+  animation: aparecer-suave 0.4s ease forwards;
+}
+
+.ver-carta-controles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.ver-carta-hoja-contador {
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.ver-carta-flechas {
+  display: flex;
+  gap: 20px;
+}
+
+.ver-carta-flecha {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--blanco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--sombra-suave);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.ver-carta-flecha:active {
+  transform: scale(0.9);
+}
+.ver-carta-flecha svg {
+  width: 22px;
+  height: 22px;
+}
+.ver-carta-flecha:disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.ver-carta-cargando {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  background: var(--amarillo);
+}
+.ver-carta-cargando[hidden] {
+  display: none;
+}
+
+/* Transición suave entre hojas al usar las flechas */
+.hoja-base.cambiando {
+  animation: cambio-hoja 0.28s ease;
+}
+@keyframes cambio-hoja {
+  0% { opacity: 0.3; transform: scale(0.97); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@media (min-width: 700px) {
+  .ver-carta-layout {
+    flex-direction: row;
+    gap: 70px;
+  }
+}

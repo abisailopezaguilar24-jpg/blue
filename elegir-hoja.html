@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover" />
+<title>Elije tu hoja — For you, My Blue</title>
+<link rel="stylesheet" href="css/estilos-base.css" />
+<link rel="stylesheet" href="css/hojas.css" />
+<link rel="stylesheet" href="css/elegir-hoja.css" />
+</head>
+<body>
+
+  <h1 class="elegir-titulo">Elije tu hoja</h1>
+
+  <!-- Los círculos se generan con JS a partir de js/hojas-config.js,
+       así que agregar una hoja nueva ahí los agrega aquí solo -->
+  <div class="elegir-circulos" id="elegir-circulos"></div>
+
+  <div class="elegir-preview-wrap">
+    <div class="hoja-base elegir-preview" id="elegir-preview">
+      <div class="hoja-contenido">
+        <!-- vista previa en blanco, sin texto -->
+      </div>
+    </div>
+  </div>
+
+  <button class="boton-flecha elegir-boton-continuar" id="btn-continuar" aria-label="Continuar">
+    <svg viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 15h52M40 3l14 12-14 12" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <script type="module" src="js/elegir-hoja.js"></script>
+</body>
+</html>

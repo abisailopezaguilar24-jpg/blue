@@ -1,0 +1,67 @@
+/* ============================================================
+   vista-previa.css — solo para vista-previa.html
+============================================================ */
+
+.vp-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 30px 20px 50px;
+}
+
+.vp-hoja-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.vp-hoja-wrap .hoja-base {
+  max-width: 320px;
+}
+
+.vp-controles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.vp-contador {
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.vp-flechas {
+  display: flex;
+  gap: 20px;
+}
+
+.vp-boton-lito {
+  padding: 16px 44px;
+  font-weight: 800;
+  font-size: 1.05rem;
+  margin-top: 6px;
+}
+
+.vp-calculando {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--amarillo);
+}
+.vp-calculando[hidden] {
+  display: none;
+}
+
+@media (min-width: 700px) {
+  .vp-layout {
+    flex-direction: row;
+    gap: 70px;
+  }
+}

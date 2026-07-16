@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover" />
+<title>Inicio — For you, My Blue</title>
+<link rel="stylesheet" href="css/estilos-base.css" />
+<link rel="stylesheet" href="css/home.css" />
+</head>
+<body>
+
+  <main class="home-fondo">
+
+    <!-- Barra superior: sobre (cartas enviadas) + campana (bandeja de entrada) -->
+    <div class="home-barra-superior">
+      <button class="home-icono-circulo" id="btn-enviadas" aria-label="Tus cartas enviadas">
+        <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.6">
+          <rect x="2.5" y="5" width="19" height="14" rx="1.5"/>
+          <path d="M3 6l9 7 9-7"/>
+        </svg>
+      </button>
+
+      <button class="home-icono-circulo" id="btn-bandeja" aria-label="Bandeja de entrada">
+        <svg viewBox="0 0 24 24" fill="black">
+          <path d="M12 2a6 6 0 0 0-6 6v3.6c0 .8-.3 1.6-.9 2.2L4 15h16l-1.1-1.2a3 3 0 0 1-.9-2.2V8a6 6 0 0 0-6-6zM9.5 19a2.5 2.5 0 0 0 5 0h-5z"/>
+        </svg>
+        <span class="home-badge" id="badge-no-leidas" hidden>0</span>
+      </button>
+    </div>
+
+    <!-- Corazones que suben flotando -->
+    <div class="home-corazones" id="contenedor-corazones" aria-hidden="true"></div>
+
+    <!-- Botón central "+" para escribir carta nueva -->
+    <button class="home-boton-mas" id="btn-nueva-carta" aria-label="Escribir nueva carta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round">
+        <path d="M12 4v16M4 12h16"/>
+      </svg>
+    </button>
+
+    <!-- Tarjeta de bienvenida -->
+    <section class="home-tarjeta aparecer">
+      <h1 id="home-bienvenida">Welcome</h1>
+      <p id="home-frase">Cargando...</p>
+    </section>
+
+    <p class="home-firma">For you, My Blue 💛💛</p>
+  </main>
+
+  <script type="module" src="js/home.js"></script>
+</body>
+</html>

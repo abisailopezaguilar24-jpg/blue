@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover" />
+<title>Vista previa — For you, My Blue</title>
+<link rel="stylesheet" href="css/estilos-base.css" />
+<link rel="stylesheet" href="css/hojas.css" />
+<link rel="stylesheet" href="css/ver-carta.css" />
+<link rel="stylesheet" href="css/vista-previa.css" />
+</head>
+<body class="fondo-amarillo">
+
+  <div class="vp-layout">
+
+    <div class="vp-hoja-wrap">
+      <div class="hoja-base" id="vp-hoja">
+        <div class="hoja-contenido">
+          <div class="hoja-fecha">
+            <span id="vp-fecha"></span>
+            <span id="vp-hora"></span>
+          </div>
+          <p class="hoja-texto" id="vp-texto"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="vp-controles">
+      <p class="vp-contador" id="vp-contador">Hoja 1/1</p>
+
+      <div class="vp-flechas">
+        <button class="ver-carta-flecha" id="vp-anterior" aria-label="Hoja anterior">
+          <svg viewBox="0 0 24 24"><path d="M15 4l-8 8 8 8" stroke="black" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="ver-carta-flecha" id="vp-siguiente" aria-label="Hoja siguiente">
+          <svg viewBox="0 0 24 24"><path d="M9 4l8 8-8 8" stroke="black" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <button class="boton-flecha vp-boton-lito" id="btn-lito">LITO</button>
+    </div>
+  </div>
+
+  <p class="vp-calculando" id="vp-calculando">
+    <span class="cargando-punto"></span>
+    <span class="cargando-punto"></span>
+    <span class="cargando-punto"></span>
+  </p>
+
+  <script type="module" src="js/vista-previa.js"></script>
+</body>
+</html>

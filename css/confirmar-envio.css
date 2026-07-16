@@ -1,0 +1,34 @@
+/* ============================================================
+   confirmar-envio.css — solo para confirmar-envio.html
+============================================================ */
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.ce-tarjeta {
+  background: var(--blanco);
+  width: min(90vw, 380px);
+  border-radius: 28px;
+  padding: 44px 32px;
+  text-align: center;
+  box-shadow: var(--sombra-suave);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ce-tarjeta h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.ce-boton {
+  width: 100%;
+  padding: 16px;
+}

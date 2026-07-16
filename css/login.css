@@ -1,0 +1,80 @@
+/* ============================================================
+   login.css — solo para index.html
+============================================================ */
+
+.login-contenedor {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.login-tarjeta {
+  background: var(--blanco);
+  width: min(90vw, 380px);
+  border-radius: 28px;
+  padding: 40px 30px 34px;
+  box-shadow: var(--sombra-suave);
+  text-align: center;
+}
+
+.login-titulo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-style: italic;
+  font-size: 2rem;
+  margin-bottom: 34px;
+}
+
+.login-input {
+  width: 100%;
+  background: var(--negro);
+  color: var(--blanco);
+  border: none;
+  border-radius: 50px;
+  padding: 18px 22px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-style: italic;
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+  transition: box-shadow 0.2s ease;
+}
+.login-input::placeholder {
+  color: var(--gris-placeholder);
+}
+.login-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--azul-boton);
+}
+
+.login-error {
+  color: var(--rojo-alerta);
+  font-size: 0.9rem;
+  font-weight: 700;
+  min-height: 1.2em;
+  margin-bottom: 8px;
+}
+.login-error.mostrar {
+  animation: sacudir 0.4s ease;
+}
+@keyframes sacudir {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+.login-boton {
+  margin-top: 10px;
+  padding: 16px 40px;
+}
+
+@media (max-width: 400px) {
+  .login-tarjeta {
+    padding: 32px 22px 28px;
+  }
+  .login-titulo {
+    font-size: 1.7rem;
+  }
+}

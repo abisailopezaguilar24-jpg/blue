@@ -1,0 +1,256 @@
+/* ============================================================
+   estilos-base.css
+   Variables, reset y componentes compartidos por TODA la app:
+   botones, modales, ícono de casa, etc.
+   Cada página además tiene su propio css (login.css, home.css...)
+   con lo que le pertenece SOLO a ella.
+============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Kalam:wght@400;700&family=Dancing+Script:wght@600;700&display=swap");
+
+:root {
+  /* Paleta — tomada directo de tus imágenes de referencia */
+  --amarillo: #f5e552;
+  --amarillo-suave: #f8ec7a;
+  --negro: #1c1c1c;
+  --blanco: #ffffff;
+  --azul-boton: #93beea;
+  --azul-boton-hover: #7aa8dc;
+  --rojo-corazon: #ff4d4d;
+  --rojo-alerta: #ff3b3b;
+  --morado-hoja: #b980e0;
+  --gris-placeholder: #b3b3b3;
+  --sombra-suave: 0 6px 16px rgba(0, 0, 0, 0.15);
+
+  /* Tipografías */
+  --font-display: "Baloo 2", system-ui, sans-serif; /* títulos, botones */
+  --font-hand: "Kalam", cursive; /* texto de las cartas (look "escrito a mano") */
+  --font-script: "Dancing Script", cursive; /* "For you, My Blue", "Elije tu hoja" */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-display);
+  background: var(--amarillo);
+  color: var(--negro);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Respeta accesibilidad: si el usuario pide menos movimiento, lo quitamos */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   Ícono de casa (esquina superior, presente en casi toda la app)
+------------------------------------------------------------ */
+.icono-casa {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--negro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  box-shadow: var(--sombra-suave);
+  transition: transform 0.18s ease;
+}
+.icono-casa:active {
+  transform: scale(0.9);
+}
+.icono-casa svg {
+  width: 22px;
+  height: 22px;
+  fill: var(--blanco);
+}
+
+/* ------------------------------------------------------------
+   Botón principal (flecha azul) — reutilizado en varias páginas
+------------------------------------------------------------ */
+.boton-flecha {
+  background: var(--azul-boton);
+  border-radius: 50px;
+  padding: 16px 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--sombra-suave);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.boton-flecha:hover {
+  background: var(--azul-boton-hover);
+}
+.boton-flecha:active {
+  transform: scale(0.94);
+}
+.boton-flecha svg {
+  width: 34px;
+  height: 20px;
+}
+
+/* ------------------------------------------------------------
+   Sistema de modales (ventanas emergentes)
+   Se usa para: "Inicio?", "Enviar?", "Ya la acabaste?", etc.
+------------------------------------------------------------ */
+.modal-fondo {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+.modal-fondo.activo {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-caja {
+  background: var(--blanco);
+  border-radius: 24px;
+  padding: 32px 28px;
+  width: min(90vw, 380px);
+  text-align: center;
+  box-shadow: var(--sombra-suave);
+  transform: translateY(24px) scale(0.94);
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modal-fondo.activo .modal-caja {
+  transform: translateY(0) scale(1);
+}
+
+.modal-caja h2 {
+  font-size: 1.4rem;
+  margin-bottom: 22px;
+  line-height: 1.3;
+}
+
+.modal-botones {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-boton {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 14px;
+  border-radius: 50px;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.modal-boton:active {
+  transform: scale(0.95);
+}
+.modal-boton.si {
+  background: var(--azul-boton);
+  color: var(--negro);
+}
+.modal-boton.no {
+  background: var(--rojo-alerta);
+  color: var(--blanco);
+}
+.modal-boton.oki {
+  background: var(--azul-boton);
+  color: var(--negro);
+}
+
+/* Aparecer/crecer para elementos genéricos */
+@keyframes aparecer-suave {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.aparecer {
+  animation: aparecer-suave 0.35s ease both;
+}
+
+/* ------------------------------------------------------------
+   Pantalla de carga / spinner mínimo (mientras habla con Firebase)
+------------------------------------------------------------ */
+.cargando-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--amarillo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+  transition: opacity 0.3s ease;
+}
+.cargando-punto {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--negro);
+  margin: 0 6px;
+  display: inline-block;
+  animation: rebote 1s infinite ease-in-out;
+}
+.cargando-punto:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.cargando-punto:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes rebote {
+  0%,
+  80%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

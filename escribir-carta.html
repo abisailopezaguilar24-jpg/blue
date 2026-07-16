@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover" />
+<title>Escribe tu carta — For you, My Blue</title>
+<link rel="stylesheet" href="css/estilos-base.css" />
+<link rel="stylesheet" href="css/escribir-carta.css" />
+</head>
+<body>
+
+  <h1 class="escribir-titulo">Escribe tu carta</h1>
+
+  <textarea
+    id="texto-carta"
+    class="escribir-textarea"
+    placeholder="Escribe aqui..."
+    spellcheck="true"
+  ></textarea>
+
+  <button class="boton-flecha escribir-boton-continuar" id="btn-continuar" aria-label="Continuar">
+    <svg viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 15h52M40 3l14 12-14 12" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <!-- Modal: "¿Ya la acabaste? ¿Sure?" -->
+  <div class="modal-fondo" id="modal-acabaste">
+    <div class="modal-caja">
+      <h2>¿Ya la acabaste?<br>¿Sure?</h2>
+      <div class="modal-botones">
+        <button class="modal-boton si" id="btn-acabaste-si">Si</button>
+        <button class="modal-boton no" id="btn-acabaste-no">No</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/escribir-carta.js"></script>
+</body>
+</html>
