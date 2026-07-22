@@ -138,12 +138,18 @@
   background: #b98a4d;
   background-image: radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.08) 0, transparent 40%),
     radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.08) 0, transparent 45%);
-  padding: 7%;
 }
+/* OJO: aquí NO se usa padding sobre .hoja-tulipan (el elemento con
+   aspect-ratio + flex), porque esa combinación tiene un bug de layout
+   en varios navegadores y encoge mal el ancho del contenido. En vez de
+   eso, el "marco" de corcho se logra con un panel interno posicionado
+   con "inset" (porcentajes sobre el propio .hoja-base). */
 .hoja-tulipan .hoja-contenido {
+  position: absolute;
+  inset: 7%;
   background: #e9e0bf;
-  padding: 16% 10% 12%;
-  box-shadow: inset 0 0 0 2px #cbbd8e;
+  padding: 14% 10% 12%;
+  box-shadow: inset 0 0 0 2px #cbbd8e, 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 .hoja-tulipan::before {
   content: "🌷";
@@ -179,7 +185,712 @@
 }
 
 /* ============================================================
+   HOJAS NUEVAS — TANDA 2 (v2, más decoradas)
+   10 diseños originales: 1 amarillo + variedad formal/casual.
+   Todo hecho con CSS puro (gradientes, formas, pseudo-elementos).
+   Nota: nunca se le pone padding directo a un .hoja-X (el elemento
+   con aspect-ratio + flex) — ver el comentario en .hoja-tulipan
+   más arriba. Si un diseño necesita un marco interno, se usa
+   position:absolute + inset en .hoja-X .hoja-contenido.
+============================================================ */
+
+/* ------------------------------------------------------------
+   6) Amarillo Sol — sol radiante de fondo + rayos + borde puntos
+------------------------------------------------------------ */
+.hoja-amarillo-sol {
+  background: conic-gradient(
+      from 0deg at 88% 10%,
+      rgba(255, 255, 255, 0.35) 0deg 8deg,
+      transparent 8deg 20deg
+    ),
+    linear-gradient(160deg, #fff8dc 0%, #ffe066 55%, #ffcf33 100%);
+  border: 3px solid #f2c94c;
+}
+.hoja-amarillo-sol::before {
+  content: "";
+  position: absolute;
+  top: -34px;
+  right: -34px;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff2b0 0%, #ffd93d 55%, rgba(255, 217, 61, 0) 75%);
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.25);
+  z-index: 1;
+}
+.hoja-amarillo-sol::after {
+  content: "☀";
+  position: absolute;
+  bottom: 4%;
+  left: 5%;
+  font-size: 1.9rem;
+  color: #f2a900;
+  text-shadow: 0 1px 0 #fff6c9;
+  opacity: 0.9;
+  z-index: 1;
+}
+.hoja-amarillo-sol .hoja-contenido {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
+}
+
+/* ------------------------------------------------------------
+   7) Formal Clásico — marfil, doble marco, florituras y sello
+------------------------------------------------------------ */
+.hoja-formal-clasico {
+  background: linear-gradient(180deg, #faf7ee 0%, #f2ece0 100%);
+}
+.hoja-formal-clasico::before {
+  content: "";
+  position: absolute;
+  inset: 5%;
+  border: 1px solid #9c9182;
+  box-shadow: inset 0 0 0 4px #faf7ee, inset 0 0 0 5px #b3a892;
+  z-index: 1;
+  pointer-events: none;
+}
+.hoja-formal-clasico::after {
+  content: "";
+  position: absolute;
+  bottom: 5%;
+  right: 6%;
+  width: 15%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #a3303d, #5c1119 75%);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35), inset 0 0 0 2px rgba(255, 255, 255, 0.15);
+  z-index: 3;
+}
+.hoja-formal-clasico .hoja-contenido::before {
+  content: "❦";
+  display: block;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #9c9182;
+  margin-bottom: 4px;
+}
+.hoja-formal-clasico .hoja-texto {
+  font-family: "Kalam", cursive;
+  letter-spacing: 0.2px;
+}
+
+/* ------------------------------------------------------------
+   8) Bosque — degradado verde, follaje en las 4 esquinas
+------------------------------------------------------------ */
+.hoja-bosque {
+  background: linear-gradient(150deg, #eaf5e6 0%, #d3ecc4 55%, #b9e0a5 100%);
+  border: 3px double #6f9d5c;
+}
+.hoja-bosque::before {
+  content: "🍃🌿🍃";
+  position: absolute;
+  top: 3%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 1.25rem;
+  letter-spacing: 8px;
+  opacity: 0.9;
+  z-index: 1;
+}
+.hoja-bosque::after {
+  content: "🍃🌿🍃";
+  position: absolute;
+  bottom: 3%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 1.15rem;
+  letter-spacing: 8px;
+  opacity: 0.85;
+  transform: rotate(180deg);
+  z-index: 1;
+}
+.hoja-bosque .hoja-contenido {
+  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.4), transparent 60%);
+}
+
+/* ------------------------------------------------------------
+   9) Océano — degradado azul, olas en capas + burbujas
+------------------------------------------------------------ */
+.hoja-oceano {
+  background: linear-gradient(180deg, #eaf6fb 0%, #cdeaf3 45%, #9fd4e6 100%);
+}
+.hoja-oceano::before {
+  content: "🐚";
+  position: absolute;
+  top: 4%;
+  right: 6%;
+  font-size: 1.5rem;
+  opacity: 0.85;
+  z-index: 1;
+}
+.hoja-oceano::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20%;
+  background: radial-gradient(circle at 8% 100%, transparent 65%, #6fb8d4 67%),
+    radial-gradient(circle at 28% 100%, transparent 65%, #7fc2dc 67%),
+    radial-gradient(circle at 48% 100%, transparent 65%, #6fb8d4 67%),
+    radial-gradient(circle at 68% 100%, transparent 65%, #7fc2dc 67%),
+    radial-gradient(circle at 88% 100%, transparent 65%, #6fb8d4 67%),
+    radial-gradient(circle at 3px 3px, rgba(255, 255, 255, 0.6) 2px, transparent 2.2px),
+    radial-gradient(circle at 40px 12px, rgba(255, 255, 255, 0.5) 1.5px, transparent 1.7px),
+    radial-gradient(circle at 80px 6px, rgba(255, 255, 255, 0.5) 1.5px, transparent 1.7px);
+  z-index: 1;
+}
+
+/* ------------------------------------------------------------
+   10) Vintage — papel envejecido, timbre postal, manchas de café
+------------------------------------------------------------ */
+.hoja-vintage {
+  background: linear-gradient(160deg, #ecdfc0 0%, #e2d1a8 100%);
+  clip-path: polygon(
+    1% 2%, 20% 0%, 45% 1%, 70% 0%, 99% 2%,
+    100% 30%, 99% 60%, 100% 85%, 98% 100%,
+    70% 99%, 40% 100%, 15% 99%, 0% 96%, 1% 60%
+  );
+}
+.hoja-vintage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+      0deg,
+      rgba(90, 70, 30, 0.05) 0px,
+      rgba(90, 70, 30, 0.05) 1px,
+      transparent 1px,
+      transparent 5px
+    ),
+    radial-gradient(circle at 88% 90%, rgba(120, 80, 30, 0.18) 0%, transparent 16%),
+    radial-gradient(circle at 12% 20%, rgba(120, 80, 30, 0.12) 0%, transparent 12%);
+  z-index: 1;
+  pointer-events: none;
+}
+.hoja-vintage::after {
+  content: "";
+  position: absolute;
+  top: 5%;
+  right: 6%;
+  width: 15%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px dashed #9c7f4a;
+  box-shadow: inset 0 0 0 5px transparent;
+  opacity: 0.75;
+  z-index: 1;
+}
+.hoja-vintage .hoja-texto,
+.hoja-vintage .hoja-fecha {
+  font-family: "Courier New", monospace;
+}
+
+/* ------------------------------------------------------------
+   11) Geométrico Pastel — Bauhaus minimalista, formas + puntos
+------------------------------------------------------------ */
+.hoja-geometrico {
+  background: radial-gradient(circle, #ffd166 5px, transparent 5.5px) 82% 14% / 100% 100% no-repeat,
+    linear-gradient(135deg, #f4eeff 0%, #eafaf6 100%);
+  border: 1px solid #d9cdf0;
+}
+.hoja-geometrico::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-style: solid;
+  border-width: 64px 64px 0 0;
+  border-color: #c9b8f0 transparent transparent transparent;
+  opacity: 0.6;
+  z-index: 1;
+}
+.hoja-geometrico::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-style: solid;
+  border-width: 0 0 64px 64px;
+  border-color: transparent transparent #9fe0cb transparent;
+  opacity: 0.6;
+  z-index: 1;
+}
+.hoja-geometrico .hoja-contenido::before {
+  content: "";
+  display: block;
+  width: 40%;
+  height: 2px;
+  margin: 0 auto 10px;
+  background: linear-gradient(90deg, #c9b8f0, #9fe0cb);
+}
+
+/* ------------------------------------------------------------
+   12) Galaxia — nocturna, estrellas, luna, nebulosa y estela
+------------------------------------------------------------ */
+.hoja-galaxia {
+  background: radial-gradient(circle at 25% 75%, rgba(190, 100, 220, 0.35) 0%, transparent 35%),
+    radial-gradient(circle at 75% 85%, rgba(80, 140, 220, 0.3) 0%, transparent 35%),
+    radial-gradient(1.5px 1.5px at 20% 30%, white, transparent),
+    radial-gradient(1px 1px at 60% 20%, white, transparent),
+    radial-gradient(2px 2px at 80% 55%, white, transparent),
+    radial-gradient(1px 1px at 35% 70%, white, transparent),
+    radial-gradient(1.5px 1.5px at 90% 80%, white, transparent),
+    radial-gradient(1px 1px at 10% 85%, white, transparent),
+    radial-gradient(1.5px 1.5px at 50% 90%, white, transparent),
+    radial-gradient(1px 1px at 70% 35%, white, transparent),
+    radial-gradient(1px 1px at 45% 45%, white, transparent),
+    radial-gradient(ellipse at top, #332a72 0%, #0d0b28 70%);
+}
+.hoja-galaxia::before {
+  content: "";
+  position: absolute;
+  top: 6%;
+  right: 8%;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f5f0d8;
+  box-shadow: -11px 3px 0 -2px #0d0b28, 0 0 14px 2px rgba(245, 240, 216, 0.5);
+  z-index: 1;
+}
+.hoja-galaxia::after {
+  content: "";
+  position: absolute;
+  top: 22%;
+  left: 8%;
+  width: 90px;
+  height: 2px;
+  background: linear-gradient(90deg, white, transparent);
+  transform: rotate(-18deg);
+  opacity: 0.8;
+  z-index: 1;
+}
+
+/* ------------------------------------------------------------
+   13) Acuarela — manchas suaves + marco pintado a mano
+------------------------------------------------------------ */
+.hoja-acuarela {
+  background: #fffdf8;
+}
+.hoja-acuarela::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 10% 12%, rgba(255, 150, 160, 0.6) 0%, transparent 30%),
+    radial-gradient(circle at 90% 10%, rgba(150, 200, 255, 0.6) 0%, transparent 32%),
+    radial-gradient(circle at 12% 92%, rgba(255, 205, 140, 0.6) 0%, transparent 30%),
+    radial-gradient(circle at 92% 90%, rgba(160, 220, 170, 0.6) 0%, transparent 32%),
+    radial-gradient(circle at 50% 4%, rgba(220, 170, 255, 0.35) 0%, transparent 24%);
+  filter: blur(3px);
+  z-index: 1;
+}
+.hoja-acuarela::after {
+  content: "";
+  position: absolute;
+  inset: 4%;
+  border: 3px solid rgba(150, 130, 200, 0.25);
+  border-radius: 6px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------
+   14) Corporativo — membrete de oficina con logo y líneas guía
+------------------------------------------------------------ */
+.hoja-corporativo {
+  background: #ffffff;
+}
+.hoja-corporativo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 9%;
+  background: linear-gradient(90deg, #1a3a6b, #2d5ea8 70%, #3d7fd8);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+}
+.hoja-corporativo::after {
+  content: "";
+  position: absolute;
+  bottom: 6%;
+  left: 10%;
+  right: 10%;
+  border-top: 2px solid #1a3a6b;
+  z-index: 1;
+}
+.hoja-corporativo .hoja-contenido {
+  padding-top: 20%;
+}
+.hoja-corporativo .hoja-contenido::before {
+  content: "";
+  position: absolute;
+  top: -13%;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2.5px solid #fff;
+  background: rgba(255, 255, 255, 0.15);
+}
+.hoja-corporativo .hoja-fecha {
+  border-bottom: 1px dashed #9fb4d0;
+  padding-bottom: 6px;
+}
+.hoja-corporativo .hoja-texto,
+.hoja-corporativo .hoja-fecha {
+  font-family: "Baloo 2", sans-serif;
+}
+
+/* ------------------------------------------------------------
+   15) Fiesta — confeti variado, globos y serpentinas
+------------------------------------------------------------ */
+.hoja-fiesta {
+  background: linear-gradient(160deg, #ffe3f1 0%, #ffd9c2 45%, #e3d4ff 100%);
+}
+.hoja-fiesta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, #ff6f91 4px, transparent 4.5px),
+    radial-gradient(circle, #6fc2ff 4px, transparent 4.5px),
+    radial-gradient(circle, #ffd166 4px, transparent 4.5px),
+    radial-gradient(circle, #9b6fff 4px, transparent 4.5px),
+    radial-gradient(circle, #6fe0b0 3px, transparent 3.5px),
+    linear-gradient(35deg, #ff9ec4 45%, transparent 46%),
+    linear-gradient(-35deg, #a0d8ff 45%, transparent 46%);
+  background-position: 8% 10%, 88% 18%, 18% 88%, 80% 80%, 50% 6%, 4% 4%, 96% 4%;
+  background-repeat: no-repeat;
+  background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px, 30px 30px, 26px 60px, 26px 60px;
+  z-index: 1;
+  opacity: 0.95;
+}
+.hoja-fiesta::after {
+  content: "🎈";
+  position: absolute;
+  top: 3%;
+  right: 6%;
+  font-size: 1.8rem;
+  z-index: 1;
+}
+
+/* ============================================================
+   HOJAS NUEVAS — TANDA 3
+   10 diseños más, distintos a los de las tandas 1 y 2.
+   Mismo principio: sin padding directo sobre .hoja-X (el que
+   tiene aspect-ratio); marcos internos con position:absolute+inset.
+============================================================ */
+
+/* ------------------------------------------------------------
+   16) Sakura — flores de cerezo cayendo, tono rosa suave
+------------------------------------------------------------ */
+.hoja-sakura {
+  background: linear-gradient(160deg, #fff5f8 0%, #ffe0ec 55%, #ffcadd 100%);
+}
+.hoja-sakura::before {
+  content: "🌸 🌸 🌸";
+  position: absolute;
+  top: 3%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 1.3rem;
+  letter-spacing: 14px;
+  opacity: 0.9;
+  z-index: 1;
+}
+.hoja-sakura::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 182, 204, 0.55) 5px, transparent 5.5px),
+    radial-gradient(circle, rgba(255, 200, 215, 0.5) 4px, transparent 4.5px),
+    radial-gradient(circle, rgba(255, 182, 204, 0.45) 3px, transparent 3.5px);
+  background-position: 12% 30%, 85% 62%, 30% 85%;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  z-index: 1;
+}
+
+/* ------------------------------------------------------------
+   17) Café — tonos cálidos de café, anillo de taza, granos
+------------------------------------------------------------ */
+.hoja-cafe {
+  background: linear-gradient(160deg, #f3e3d3 0%, #e0c3a0 100%);
+  border: 3px solid #8a5a34;
+}
+.hoja-cafe::before {
+  content: "";
+  position: absolute;
+  top: 6%;
+  right: 8%;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 6px solid rgba(110, 70, 40, 0.22);
+  z-index: 1;
+}
+.hoja-cafe::after {
+  content: "☕";
+  position: absolute;
+  bottom: 4%;
+  left: 5%;
+  font-size: 1.9rem;
+  opacity: 0.9;
+  z-index: 1;
+}
+
+/* ------------------------------------------------------------
+   18) Música — pauta musical arriba, notas al pie
+------------------------------------------------------------ */
+.hoja-musica {
+  background: #faf6ec;
+}
+.hoja-musica::before {
+  content: "";
+  position: absolute;
+  top: 8%;
+  left: 8%;
+  right: 8%;
+  height: 10%;
+  background: repeating-linear-gradient(
+    180deg,
+    #2b2b2b 0px,
+    #2b2b2b 1.5px,
+    transparent 1.5px,
+    transparent 7px
+  );
+  opacity: 0.65;
+  z-index: 1;
+}
+.hoja-musica::after {
+  content: "♪ ♫ ♪";
+  position: absolute;
+  bottom: 4%;
+  right: 6%;
+  font-size: 1.4rem;
+  color: #2b2b2b;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+/* ------------------------------------------------------------
+   19) Desierto — dunas cálidas, sol y cactus
+------------------------------------------------------------ */
+.hoja-desierto {
+  background: linear-gradient(180deg, #ffe9c7 0%, #f0c48a 55%, #dba15c 100%);
+}
+.hoja-desierto::before {
+  content: "";
+  position: absolute;
+  top: -22px;
+  left: -22px;
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffdd7a 0%, rgba(255, 221, 122, 0) 70%);
+  z-index: 1;
+}
+.hoja-desierto::after {
+  content: "🌵";
+  position: absolute;
+  bottom: 4%;
+  right: 6%;
+  font-size: 2rem;
+  opacity: 0.9;
+  z-index: 1;
+}
+
+/* ------------------------------------------------------------
+   20) Invierno — azul helado, copos de nieve
+------------------------------------------------------------ */
+.hoja-invierno {
+  background: linear-gradient(160deg, #eef8ff 0%, #cfe9fb 100%);
+  border: 2px solid #bcdff3;
+}
+.hoja-invierno::before {
+  content: "❄ ❄ ❄";
+  position: absolute;
+  top: 3%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 1.2rem;
+  letter-spacing: 20px;
+  color: #7cb8db;
+  opacity: 0.85;
+  z-index: 1;
+}
+.hoja-invierno::after {
+  content: "❄";
+  position: absolute;
+  bottom: 5%;
+  right: 8%;
+  font-size: 1.6rem;
+  color: #7cb8db;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+/* ------------------------------------------------------------
+   21) Mapa del Tesoro — pergamino, brújula, borde punteado
+------------------------------------------------------------ */
+.hoja-mapa-tesoro {
+  background: radial-gradient(ellipse at center, #e8d2a0 0%, #cba764 100%);
+}
+.hoja-mapa-tesoro::before {
+  content: "";
+  position: absolute;
+  inset: 6%;
+  border: 2px dashed #8a6a30;
+  opacity: 0.6;
+  z-index: 1;
+  pointer-events: none;
+}
+.hoja-mapa-tesoro::after {
+  content: "🧭";
+  position: absolute;
+  top: 5%;
+  right: 6%;
+  font-size: 1.7rem;
+  opacity: 0.9;
+  z-index: 1;
+}
+
+/* ------------------------------------------------------------
+   22) Neón — fondo oscuro, doble marco con brillo neón
+------------------------------------------------------------ */
+.hoja-neon {
+  background: linear-gradient(160deg, #1a0b2e 0%, #0d0518 100%);
+}
+.hoja-neon::before {
+  content: "";
+  position: absolute;
+  inset: 5%;
+  border: 2px solid #ff2fd4;
+  box-shadow: 0 0 8px #ff2fd4, inset 0 0 8px #ff2fd4;
+  z-index: 1;
+  pointer-events: none;
+}
+.hoja-neon::after {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border: 1px solid #2ffcff;
+  box-shadow: 0 0 6px #2ffcff, inset 0 0 6px #2ffcff;
+  z-index: 1;
+  pointer-events: none;
+}
+.hoja-neon .hoja-fecha,
+.hoja-neon .hoja-texto {
+  text-shadow: 0 0 4px currentColor;
+}
+
+/* ------------------------------------------------------------
+   23) Bohemio — terracota, arco decorativo, flores lineales
+------------------------------------------------------------ */
+.hoja-boho {
+  background: linear-gradient(160deg, #f5e6d8 0%, #e8c9a8 100%);
+}
+.hoja-boho::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 22%;
+  border: 3px solid #b06a3a;
+  border-bottom: none;
+  border-radius: 100px 100px 0 0;
+  opacity: 0.45;
+  z-index: 1;
+}
+.hoja-boho::after {
+  content: "🌼 🌼";
+  position: absolute;
+  top: 4%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 1.3rem;
+  letter-spacing: 20px;
+  opacity: 0.85;
+  z-index: 1;
+}
+
+/* ------------------------------------------------------------
+   24) Dulce — rayas pastel tipo caramelo, paleta y dulce
+------------------------------------------------------------ */
+.hoja-dulce {
+  background: repeating-linear-gradient(
+    45deg,
+    #ffe1f0 0px,
+    #ffe1f0 18px,
+    #fff5fa 18px,
+    #fff5fa 36px
+  );
+}
+.hoja-dulce::before {
+  content: "🍬";
+  position: absolute;
+  top: 4%;
+  right: 6%;
+  font-size: 1.7rem;
+  opacity: 0.9;
+  z-index: 1;
+}
+.hoja-dulce::after {
+  content: "🍭";
+  position: absolute;
+  bottom: 4%;
+  left: 5%;
+  font-size: 1.8rem;
+  opacity: 0.9;
+  z-index: 1;
+}
+.hoja-dulce .hoja-contenido {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+/* ------------------------------------------------------------
+   25) Kraft Reciclado — papel kraft, hilo y sello sencillo
+------------------------------------------------------------ */
+.hoja-kraft {
+  background: linear-gradient(160deg, #cbb28a 0%, #ab8c5e 100%);
+}
+.hoja-kraft::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6%;
+  height: 14%;
+  background: linear-gradient(180deg, #8a6a3a, #6e4f26);
+  border-radius: 0 0 6px 6px;
+  z-index: 1;
+}
+.hoja-kraft::after {
+  content: "✉";
+  position: absolute;
+  bottom: 5%;
+  right: 6%;
+  font-size: 1.6rem;
+  color: #5a3f1f;
+  opacity: 0.85;
+  z-index: 1;
+}
+
+/* ============================================================
    AGREGAR HOJA NUEVA AQUÍ
    1. Agrega el objeto en js/hojas-config.js
    2. Copia un bloque de arriba y cámbiale la clase, ej: .hoja-mihoja
+   3. Nunca le pongas padding directo al selector .hoja-X (el que
+      tiene aspect-ratio); si necesitas un marco interno, usa
+      position:absolute + inset en .hoja-X .hoja-contenido
+      (mira el ejemplo en .hoja-tulipan más arriba).
 ============================================================ */
