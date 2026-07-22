@@ -1,22 +1,40 @@
 /* ============================================================
    home.css — solo para home.html
+   Rediseño: fondo amarillo cálido + gerberas decorativas (SVG
+   original) en vez de las franjas negras. Mismos botones e IDs
+   de antes, así que home.js no necesitó ningún cambio.
 ============================================================ */
 
 .home-fondo {
   min-height: 100vh;
   position: relative;
   overflow: hidden;
-  background: repeating-linear-gradient(
-    to bottom,
-    var(--amarillo) 0px,
-    var(--amarillo) 60px,
-    var(--negro) 60px,
-    var(--negro) 100px
-  );
+  background: radial-gradient(ellipse at top, #fff6cf 0%, #ffe680 55%, #ffd94d 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 24px 20px 40px;
+  padding: 22px 20px 36px;
+}
+
+/* ---------- Gerberas decorativas ---------- */
+.flor-decorativa {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.9;
+  filter: drop-shadow(0 6px 10px rgba(150, 110, 20, 0.18));
+}
+.flor-superior {
+  width: clamp(120px, 34vw, 190px);
+  top: -34px;
+  left: -34px;
+  transform: rotate(-12deg);
+}
+.flor-inferior {
+  width: clamp(100px, 28vw, 160px);
+  bottom: -30px;
+  right: -30px;
+  transform: rotate(20deg);
 }
 
 /* ---------- Barra superior ---------- */
@@ -29,23 +47,24 @@
 }
 
 .home-icono-circulo {
-  width: 64px;
-  height: 64px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background: var(--amarillo-suave);
+  background: #fffdf3;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  box-shadow: var(--sombra-suave);
+  box-shadow: 0 6px 14px rgba(180, 140, 30, 0.22);
+  border: 2px solid #ffe9a8;
   transition: transform 0.15s ease;
 }
 .home-icono-circulo:active {
   transform: scale(0.92);
 }
 .home-icono-circulo svg {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
 }
 
 .home-badge {
@@ -54,21 +73,21 @@
   right: -4px;
   background: var(--rojo-corazon);
   color: white;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 800;
-  min-width: 22px;
-  height: 22px;
+  min-width: 21px;
+  height: 21px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--amarillo);
+  border: 2px solid #fff6cf;
 }
 
 /* ---------- Corazones flotantes ---------- */
 .home-corazones {
   position: absolute;
-  top: 90px;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
   width: 320px;
@@ -106,62 +125,141 @@
   }
 }
 
-/* ---------- Botón central "+" ---------- */
-.home-boton-mas {
-  width: min(58vw, 240px);
-  height: min(58vw, 240px);
-  border-radius: 50%;
-  background: var(--amarillo-suave);
+/* ---------- Botón central "+" con anillo de pétalos ---------- */
+.home-boton-mas-wrap {
+  position: relative;
+  width: min(58vw, 230px);
+  height: min(58vw, 230px);
+  margin-top: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
-  box-shadow: var(--sombra-suave);
-  transition: transform 0.18s ease;
   z-index: 10;
+}
+
+/* 8 pétalos alrededor del botón, cada uno rotado un poco distinto */
+.petalo-boton {
+  position: absolute;
+  width: 30%;
+  height: 46%;
+  background: linear-gradient(180deg, #fffbea, #ffdf7e);
+  border: 1.5px solid #f0c452;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  top: 50%;
+  left: 50%;
+  transform-origin: 50% 0%;
+  opacity: 0.9;
+}
+.petalo-boton:nth-child(1) { transform: translate(-50%, -100%) rotate(0deg); }
+.petalo-boton:nth-child(2) { transform: translate(-50%, -100%) rotate(45deg); }
+.petalo-boton:nth-child(3) { transform: translate(-50%, -100%) rotate(90deg); }
+.petalo-boton:nth-child(4) { transform: translate(-50%, -100%) rotate(135deg); }
+.petalo-boton:nth-child(5) { transform: translate(-50%, -100%) rotate(180deg); }
+.petalo-boton:nth-child(6) { transform: translate(-50%, -100%) rotate(225deg); }
+.petalo-boton:nth-child(7) { transform: translate(-50%, -100%) rotate(270deg); }
+.petalo-boton:nth-child(8) { transform: translate(-50%, -100%) rotate(315deg); }
+
+.home-boton-mas {
+  width: 62%;
+  height: 62%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffcf4d, #e8a51a 85%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 20px rgba(180, 130, 20, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+  transition: transform 0.18s ease;
   position: relative;
+  z-index: 2;
 }
 .home-boton-mas:active {
   transform: scale(0.94);
 }
 .home-boton-mas svg {
-  width: 30%;
-  height: 30%;
+  width: 32%;
+  height: 32%;
 }
 
 /* ---------- Tarjeta de bienvenida ---------- */
 .home-tarjeta {
-  background: var(--blanco);
+  background: #fffdf6;
   width: 100%;
   max-width: 480px;
-  border-radius: 22px;
-  padding: 22px 26px;
-  margin-top: 34px;
+  border-radius: 24px;
+  padding: 24px 26px 22px;
+  margin-top: 30px;
   text-align: center;
-  box-shadow: var(--sombra-suave);
+  box-shadow: 0 10px 24px rgba(150, 110, 20, 0.16);
+  border: 1px solid #ffedb0;
   z-index: 10;
+  position: relative;
+}
+.home-tarjeta-flor {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.6rem;
+  background: #fffdf6;
+  border-radius: 50%;
+  padding: 4px 8px;
+  box-shadow: 0 3px 6px rgba(150, 110, 20, 0.18);
 }
 .home-tarjeta h1 {
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   font-family: "Kalam", cursive;
   margin-bottom: 8px;
+  margin-top: 6px;
+  color: #5c4400;
 }
 .home-tarjeta p {
   font-family: "Kalam", cursive;
   font-size: 1rem;
   line-height: 1.4;
+  color: #7a5c10;
 }
 
 .home-firma {
   font-family: var(--font-script);
   font-size: 1.6rem;
   margin-top: auto;
-  padding-top: 26px;
-  color: var(--negro);
+  padding-top: 24px;
+  color: #6b4e0c;
+  z-index: 10;
+  position: relative;
 }
 
-@media (max-width: 400px) {
+/* ---------- Ajustes para celular (donde más se va a usar) ---------- */
+@media (max-width: 420px) {
+  .home-fondo {
+    padding: 18px 16px 28px;
+  }
+  .home-icono-circulo {
+    width: 52px;
+    height: 52px;
+  }
   .home-tarjeta {
-    padding: 18px 20px;
+    padding: 22px 20px 20px;
+  }
+  .home-tarjeta h1 {
+    font-size: 1.15rem;
+  }
+  .home-firma {
+    font-size: 1.35rem;
+  }
+  .flor-superior {
+    width: clamp(90px, 32vw, 130px);
+  }
+  .flor-inferior {
+    width: clamp(80px, 26vw, 110px);
+  }
+}
+
+@media (max-height: 700px) {
+  .home-boton-mas-wrap {
+    margin-top: 14px;
+  }
+  .home-tarjeta {
+    margin-top: 18px;
   }
 }
